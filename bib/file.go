@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func WriteToFile(b Bib, filepath string) error {
+func WriteToFile(b *Bib, filepath string) error {
 	if !strings.HasSuffix(filepath, ".bib") {
 		return fmt.Errorf("unexpected filepath %s, the filepath should be end with '.bib'", filepath)
 	}
