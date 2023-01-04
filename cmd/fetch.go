@@ -8,18 +8,23 @@ import (
 )
 
 var (
-	doi string
+	doi         string
+	bibfilePath string
 
 	fetchCmd = &cobra.Command{
 		Use:   "fetch",
 		Short: "fetch bibtex from https://doi.org/",
 		Long:  "fetch bibtex from https://doi.org/",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			bib, err := bib.FetchBib(doi)
+			b, err := bib.FetchBib(doi)
 			if err != nil {
 				return err
 			}
-			fmt.Println(bib)
+			err = bib.WriteToFile(b, bibfilePath)
+			if err != nil {
+				return err
+			}
+			fmt.Println(b)
 			return nil
 		},
 	}
@@ -28,5 +33,6 @@ var (
 func init() {
 	rootCmd.AddCommand(fetchCmd)
 	fetchCmd.Flags().StringVarP(&doi, "doi", "d", "", "DOI of the paper you want to fetch")
+	fetchCmd.Flags().StringVarP(&bibfilePath, "bibfile", "b", "lettera.bib", "filepath that you want to write the fetched bib data to")
 	fetchCmd.MarkFlagRequired("doi")
 }
