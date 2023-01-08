@@ -15,6 +15,15 @@ type Paper struct {
 	Note  string
 }
 
+func NewPaper(b *bib.Bib, doi DOI, note string) *Paper {
+	return &Paper{
+		Title: b.Title,
+		Bib:   b,
+		Doi:   doi,
+		Note:  note,
+	}
+}
+
 func (p *Paper) String() string {
 	return p.Title
 }
