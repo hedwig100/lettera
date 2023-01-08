@@ -15,5 +15,5 @@ func WriteToFile(b *Bib, filepath string) error {
 		return err
 	}
 	defer f.Close()
-	return b.writeToFile(f)
+	return b.writeln(f)
 }

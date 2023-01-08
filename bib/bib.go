@@ -2,7 +2,7 @@ package bib
 
 import (
 	"errors"
-	"os"
+	"io"
 	"strings"
 
 	"github.com/nickng/bibtex"
@@ -49,9 +49,8 @@ func (b *Bib) String() string {
 	return b.Body
 }
 
-// writeToFile write bib to file
-// the file must be opened with os.O_APPEND
-func (b *Bib) writeToFile(f *os.File) error {
-	_, err := f.Write([]byte(b.Body + "\n"))
+// writeln write bib to io.Writer with newline
+func (b *Bib) writeln(w io.Writer) error {
+	_, err := w.Write([]byte(b.Body + "\n"))
 	return err
 }
