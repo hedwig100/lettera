@@ -17,7 +17,7 @@ func TestToMarkdown(t *testing.T) {
 	expect :=
 		`| title | note | doi | bibkey |
 | -- | -- | -- | -- |
-| A go tool | great | [doi](100/100) | 101 |`
+| A go tool | great | [doi](https://doi.org/100/100) | 101 |`
 
 	if actual := paper.ToMarkdownTable([]paper.Paper{p}); actual != expect {
 		t.Errorf("expect '%s' but actually get '%s'", expect, actual)
