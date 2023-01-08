@@ -10,7 +10,7 @@ import (
 func TestToMarkdown(t *testing.T) {
 	p := paper.Paper{
 		Title: "A go tool",
-		Bib:   &bib.Bib{Key: "101"},
+		Bib:   &bib.Bib{CiteKey: "101"},
 		Doi:   "100/100",
 		Note:  "great",
 	}

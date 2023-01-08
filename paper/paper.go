@@ -20,7 +20,7 @@ func (p *Paper) String() string {
 }
 
 func (p *Paper) toMarkdownRow() string {
-	return "| " + p.Title + " | " + p.Note + " | [doi](" + p.Doi + ") | " + p.Bib.Key + " |"
+	return "| " + p.Title + " | " + p.Note + " | [doi](" + p.Doi + ") | " + p.Bib.CiteKey + " |"
 }
 
 func markdownTableHeader() string {
