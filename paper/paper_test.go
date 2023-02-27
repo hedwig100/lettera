@@ -1,25 +1,26 @@
 package paper_test
 
 import (
+	"bytes"
 	"testing"
 
-	"github.com/hedwig100/lettera/bib"
 	"github.com/hedwig100/lettera/paper"
 )
 
-func TestToMarkdown(t *testing.T) {
-	p := paper.Paper{
-		Title: "A go tool",
-		Bib:   &bib.Bib{CiteKey: "101"},
-		Doi:   "100/100",
-		Note:  "great",
-	}
-	expect :=
-		`| title | note | doi | bibkey |
-| -- | -- | -- | -- |
-| A go tool | great | [doi](https://doi.org/100/100) | 101 |`
+const EXPECT_HEADER = `# Reference List
 
-	if actual := paper.ToMarkdownTable([]paper.Paper{p}); actual != expect {
-		t.Errorf("expect '%s' but actually get '%s'", expect, actual)
+This file manages a reference paper list. Below is a paper list.
+
+| title | note | doi | bibkey |
+| -- | -- | -- | -- |
+`
+
+func TestInitMarkdown(t *testing.T) {
+	b := &bytes.Buffer{}
+	if err := paper.InitMarkdown(b); err != nil {
+		t.Errorf("unexpected error: %s", err)
+	}
+	if actual := b.String(); actual != EXPECT_HEADER {
+		t.Errorf("unexpected actual=%s,expect=%s", actual, EXPECT_HEADER)
 	}
 }
